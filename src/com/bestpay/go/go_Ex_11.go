@@ -2,6 +2,13 @@ package main
 
 import "fmt"
 
+/**
+递归
+ */
+
+ /**
+ face 函数在到达 face(0) 前一直调用自身。
+  */
 func fact(n int)  int{
 
 	if n == 0 {
