@@ -1,56 +1,54 @@
 package main
-// 这个示例程序展示goroutine 调度器是如何在单个线程上
-// 切分时间片的
-
-import "fmt"
-import "runtime"
-import "sync"
-
-//wg 用来等待程序完成
-var wg sync.WaitGroup
 
 
-// main 是所以Go程序的入口
+
+import (
+	"net/url"
+	"fmt"
+	"strings"
+)
+
+/**
+URL解析
+ */
 func main()  {
 
-	//分配一个逻辑处理器给调度器使用
-	runtime.GOMAXPROCS(1)
+	//我们将解析这个 URL 示例，它包含了一个 scheme，认证信息，主机名，端口，路径，查询参数和片段
+	s := "postgres://user:pass@host.com:5432/path?k=v#f"
 
-	// 计数加2， 表示要等待两个goroutine
-	wg.Add(2)
+	u,err := url.Parse(s)
 
-	//创建两个goroutine
-	fmt.Println("Create Goroutines")
-	go printPrime("A");
-	go printPrime("B");
+	//解析这个 URL 并确保解析没有出错
+	if err != nil{
+		panic(err)
+	}
 
-	// 等待goroutine 结束
-	fmt.Println("Waiting To Finish")
-	wg.Wait()
+	//直接访问 scheme。
+	fmt.Println(u.Scheme)
 
-	fmt.Println("Terminating Program")
+	//User 包含了所有的认证信息，这里调用 Username和 Password 来获取独立值。
+	fmt.Println(u.User)
 
-}
+	fmt.Println(u.User.Username())
 
-// printPrime 显示5000 以内的素数值
-func printPrime(prefix string)  {
+	p,_ := u.User.Password()
+	fmt.Println(p)
 
-	// 在函数退出时调度Done 来通知main 函数工作已经完成
-	defer wg.Done()
+	//Host 同时包括主机名和端口信息，如过端口存在的话，使用 strings.Split() 从 Host 中手动提取端口。
+	fmt.Println(u.Host)
 
-	next:
-		for outer := 2; outer < 5000; outer++ {
+	h := strings.Split(u.Host,":")
+	fmt.Println(h[0])
+	fmt.Println(h[1])
 
-			for inner := 2; inner < outer; inner++{
+	fmt.Println(u.Path)
+	fmt.Println(u.Fragment)
 
-				if outer%inner == 0{
-					continue next
-				}
-			}
+	//要得到字符串中的 k=v 这种格式的查询参数，可以使用 RawQuery 函数。你也可以将查询参数解析为一个map。已解析的查询参数 map 以查询字符串为键，对应值字符串切片为值，所以如何只想得到一个键对应的第一个值，将索引位置设置为 [0] 就行了。
+	fmt.Println(u.RawQuery)
 
-			fmt.Printf("%s:%d\n",prefix,outer)
+	m,_ := url.ParseQuery(u.RawQuery)
+	fmt.Println(m)
 
-		}
-
-		fmt.Println("Completed %s",prefix)
+	fmt.Println(m["k"][0])
 }
