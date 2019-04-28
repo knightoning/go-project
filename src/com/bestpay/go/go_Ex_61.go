@@ -4,6 +4,8 @@ package main
 // 这个示例程序展示goroutine 调度器是如何在单个线程上
 // 切分时间片的
 
+//素数定义：除1和自身外，不能被其他自然数整除的数，又叫质数
+
 import "fmt"
 import "runtime"
 import "sync"
@@ -16,7 +18,8 @@ var wg sync.WaitGroup
 func main()  {
 
 	//分配一个逻辑处理器给调度器使用
-	runtime.GOMAXPROCS(1)
+	//runtime.GOMAXPROCS(1)
+	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	// 计数加2， 表示要等待两个goroutine
 	wg.Add(2)
