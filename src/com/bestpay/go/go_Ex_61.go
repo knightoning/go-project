@@ -26,8 +26,8 @@ func main()  {
 
 	//创建两个goroutine
 	fmt.Println("Create Goroutines")
-	go printPrime("A");
-	go printPrime("B");
+	go printPrime("A")
+	go printPrime("B")
 
 	// 等待goroutine 结束
 	fmt.Println("Waiting To Finish")
