@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-var hello_word ="";
+var hello_word =""
 
 func main()  {
 

@@ -4,23 +4,23 @@ import "fmt"
 
 func main() {
 
-	fmt.Println("Hello World");
+	fmt.Println("Hello World")
 
-	var age int;
-	fmt.Println(age);
-
-	var istrue = true;
-	var istrue2 bool = true;
-	fmt.Println(istrue);
-	fmt.Println(istrue2);
-
-	age = 1000;
+	var age int
 	fmt.Println(age)
 
-	var app string;
-	var str1 string ="Hello ";
-	var str2 string ="World";
-	app = str1 + str2;
+	var istrue = true
+	var istrue2 bool = true
+	fmt.Println(istrue)
+	fmt.Println(istrue2)
+
+	age = 1000
+	fmt.Println(age)
+
+	var app string
+	var str1 string ="Hello "
+	var str2 string ="World"
+	app = str1 + str2
 	fmt.Println(app)
 
 	var a = 1.0
