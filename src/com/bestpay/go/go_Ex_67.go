@@ -67,7 +67,7 @@ type Resource struct {
 	errCount int
 }
 
-// Poll 为url执行一个HTTP HEAD 请求，并返回HTTP的状态字符串或者一个错误字符串
+// Poll 为url执行一个HTTP HEAD 请求，并返回HTTP的状态字符串或一个错误字符串
 func (r *Resource) Poll() string {
 
 	resp,err := http.Head(r.url)
