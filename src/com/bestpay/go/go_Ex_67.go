@@ -7,9 +7,13 @@ import (
 )
 
 const(
+	// Poller Go 线程的启动数
 	numPollers     = 2
+	// 轮询每一个URL的频率
 	pollInterval   = 60 * time.Second
+	// 将状态记录到标准输出的频率
 	statusInterval = 10 * time.Second
+	//退回超时的错误
 	errTimeout     = 10 * time.Second
 )
 
@@ -20,12 +24,14 @@ var urls = []string{
 	"http://blog.golang.org",
 }
 
+// State 表示一个URL最后的已知状态。
 type State struct {
 	url    string
 	status string
 }
 
-//
+//StateMonitor 维护了一个映射，它存储了URL被轮询的状态，并每隔 updateInterval
+//纳秒打印出其当前的状态。它向资源状态的接收者返回一个 chan State。
 func StateMonitor(updateInterval time.Duration) chan <- State {
 
 	updates := make(chan State)
@@ -46,6 +52,7 @@ func StateMonitor(updateInterval time.Duration) chan <- State {
 	return  updates
 }
 
+// logState 打印一个状态映射。
 func logState(s map[string]string)  {
 
 	log.Println("Current state:")
@@ -54,11 +61,13 @@ func logState(s map[string]string)  {
 	}
 }
 
+// Resource 表示一个被此程序轮询的HTTP UTL。
 type Resource struct {
 	url      string
 	errCount int
 }
 
+// Poll 为url执行一个HTTP HEAD 请求，并返回HTTP的状态字符串或者一个错误字符串
 func (r *Resource) Poll() string {
 
 	resp,err := http.Head(r.url)
