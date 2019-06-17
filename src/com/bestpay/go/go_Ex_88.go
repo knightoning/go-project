@@ -26,6 +26,10 @@ func main()  {
 	for i:=0; i < len(arrKeyvalue) ;i++{
 		fmt.Printf("Person at %d is %s\n",i,arrKeyvalue[i])
 	}
+
+	for i := 0; i < 3; i++{
+		fp(&[3]int{i,i*i,i*i*i})
+	}
 }
 
 func f(a [3]int)  {

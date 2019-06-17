@@ -9,6 +9,7 @@ const LIM = 41
 
 var fibs[LIM] uint64
 
+// 通过内存缓存来提升性能
 func main()  {
 
 	var result uint64 = 0
@@ -39,6 +40,7 @@ func fibonacci(n int) (res uint64) {
 		res = fibonacci(n-1) + fibonacci(n-2)
 	}
 
+	// 临时缓存第n个计算的值
 	fibs[n] = res
 	return
 
