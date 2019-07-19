@@ -1,5 +1,13 @@
 package main
 
+/**
+定义方法的一般格式如下：
+
+func (recv receiver_type) methodName(parameter_list) (return_value_list) { ... }
+在方法名之前，func 关键字之后的括号中指定 receiver。
+
+如果 recv 是 receiver 的实例，Method1 是它的方法名，那么方法调用遵循传统的 object.name 选择器符号：recv.Method1()。
+ */
 import "fmt"
 
 type TwoInts struct {
