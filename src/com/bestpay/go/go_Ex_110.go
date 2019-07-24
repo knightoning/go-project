@@ -33,9 +33,9 @@ func main()  {
 	c := new(Customer)
 	c.Name = "Barak Obama"
 	c.log = new (Log)
-	c.log.msg = "1 - Yes we can!"
+	c.log.msg = "1 - Yes I  can!"
 
-	c = &Customer{"Barak Obama",&Log{"1 - Yes we can!"}}
+	c = &Customer{"Barak Obama",&Log{"1 - Yes I can!"}}
 
 	c.Log().Add("2 - After me the world will be a better place!")
 	fmt.Println(c.Log())
