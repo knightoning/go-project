@@ -1,5 +1,11 @@
 package main
 
+import (
+	"fmt"
+	_"sort"
+	_ "time"
+)
+
 type Sorter interface {
 	Len() int
 	Less(i,j int) bool
@@ -49,6 +55,10 @@ func (p IntArray) Swap(i,j int){
 
 type StringArray []string
 
+func (p StringArray) Less(i, j int) bool {
+	panic("implement me")
+}
+
 func (p StringArray) Len() int  {
 	return len(p)
 }
@@ -80,4 +90,79 @@ func IntsAreSorted(a []int) bool  {
 func StringsAreSorted(a []string) bool  {
 
 	return IsSorted(StringArray(a))
+}
+
+
+func ints()  {
+	data := []int{74, 59, 238, -784, 9845, 959, 905, 0, 0, 42, 7586, -5467984, 7586}
+	a := IntArray(data)
+	SortInts(a)
+	if IntsAreSorted(a){
+		panic("fails")
+	}
+	fmt.Printf("The sorted array is :%v\n",a)
+}
+
+func strings()  {
+	data := []string{"monday", "friday", "tuesday", "wednesday", "sunday", "thursday", "", "saturday"}
+	a := StringArray(data)
+	SortStrings(a)
+	if StringsAreSorted(a){
+		panic("fail")
+	}
+
+	fmt.Printf("The sorted array is :%v\n",a)
+}
+
+type day struct {
+	num       int
+	shortName string
+	longName  string
+}
+
+type dayArray struct {
+	data[]*day
+}
+
+func (p *dayArray)Len()int  {
+	return len(p.data)
+}
+
+func (p *dayArray)Less(i,j int)bool  {
+
+	return p.data[i].num < p.data[j].num
+}
+
+func (p *dayArray) Swap(i,j int) {
+	p.data[i],p.data[j] = p.data[j],p.data[i]
+
+}
+
+func days()  {
+
+	Sunday := day{0,"SUN","Sunday"}
+	Monday := day{1,"MON","Monday"}
+	Tuesday := day{2,"TUE","Tuesday"}
+	Wednesday := day{3,"WED","Wednesday"}
+	Thursday := day{4,"THU","Thursday"}
+	Friday := day{5,"FRI","Friday"}
+	Saturday := day{6,"SAT","Saturday"}
+	data := []*day{&Tuesday, &Thursday, &Wednesday, &Sunday, &Monday, &Friday, &Saturday}
+	a:= dayArray{data}
+	Sort(&a)
+	if !IsSorted(&a){
+		panic("fail")
+	}
+
+	for _,d := range data{
+		fmt.Printf("%s",d.longName)
+	}
+
+	fmt.Printf("\n")
+}
+
+func main()  {
+	ints()
+	strings()
+	days()
 }
