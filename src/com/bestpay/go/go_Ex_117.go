@@ -97,7 +97,7 @@ func ints()  {
 	data := []int{74, 59, 238, -784, 9845, 959, 905, 0, 0, 42, 7586, -5467984, 7586}
 	a := IntArray(data)
 	SortInts(a)
-	if IntsAreSorted(a){
+	if !IsSorted(a){
 		panic("fails")
 	}
 	fmt.Printf("The sorted array is :%v\n",a)
@@ -107,7 +107,7 @@ func strings()  {
 	data := []string{"monday", "friday", "tuesday", "wednesday", "sunday", "thursday", "", "saturday"}
 	a := StringArray(data)
 	SortStrings(a)
-	if StringsAreSorted(a){
+	if IsSorted(a){
 		panic("fail")
 	}
 
