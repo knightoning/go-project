@@ -1,0 +1,5 @@
+hello
+go
+hello
+go
+go go golang!
