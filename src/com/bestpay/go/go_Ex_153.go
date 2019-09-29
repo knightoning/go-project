@@ -16,17 +16,19 @@ func sendData(ch chan string)  {
 	ch <- "London"
 	ch <- "Beijing"
 	ch <- "Tokio"
+
 	close(ch)
 }
 
-func getData(ch chan string)  {
+func getData(ch chan string) {
 
-	for{
-		input,open := <-ch
-		if !open{
+	for {
+		input, open := <-ch
+		if !open {
 			break
 		}
 
-		fmt.Printf("%s \n",input)
+		fmt.Printf("%s \n", input)
 	}
+
 }
